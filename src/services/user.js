@@ -3,7 +3,8 @@ import * as axios from 'axios';
 
 const register = async function(user) {
     try {
-        const response = await axios.post('localhost:3000/users/signin', user);
+        console.log(user);
+        const response = await axios.post(' http://localhost:3000/users/signup', user);
         const addeduser = parseItem(response, 201);
         return addeduser;
     } catch (error) {
@@ -21,6 +22,6 @@ export const parseItem = (response, code) => {
     return item;
 };
 
-module.exports = {
+export const userService = {
     register,
 }
