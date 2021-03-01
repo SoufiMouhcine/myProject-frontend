@@ -14,7 +14,7 @@
               id="email"
               aria-describedby="emailHelp"
               placeholder="Email"
-              v-model="email"
+              v-model="user.email"
               required
             />
           </div>
@@ -24,7 +24,7 @@
               class="form-control"
               id="password"
               placeholder="Password"
-              v-model="password"
+              v-model="user.password"
               required
             />
           </div>
@@ -38,18 +38,21 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "login",
   data() {
     return {
-      email: "",
-      password: "",
+      user: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
-    login() {
-      console.log(this.password);
-      console.log(this.email);
+    ...mapActions(["loginAction"]),
+    async login() {
+      await this.loginAction(this.user);
     },
   },
 };

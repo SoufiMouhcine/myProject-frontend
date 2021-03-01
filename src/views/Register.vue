@@ -94,9 +94,8 @@ export default {
         alert("Password length should be greater than 6");
       } else {
         await this.registerAction(this.user);
+        
       }
-      alert("compte créer avec succes");
-      this.$router.push({ name: "login" });
     },
   },
 };
