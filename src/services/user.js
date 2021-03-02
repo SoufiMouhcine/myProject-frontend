@@ -24,7 +24,6 @@ const login = async function(user) {
 };
 
 const logout = () => {
-    console.log("mouchiazeazeqsd")
     localStorage.removeItem('token');
 }
 

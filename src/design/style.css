@@ -1,0 +1,23 @@
+.dep {
+    text-align: justify;
+}
+
+.depButton {
+    text-align: end;
+}
+
+.divider {
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}
+
+.zoom {
+    /* Animation */
+    transition: transform .2s;
+}
+
+.zoom:hover {
+    transform: scale(1.03);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
