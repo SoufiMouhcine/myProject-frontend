@@ -31,6 +31,22 @@ const deleteDepartement = async function(departement) {
         return console.error(error);
     }
 };
+const updateDepartement = async function(departement, name) {
+    console.log(departement._id + "dep and name" + name)
+
+    try {
+        const response = await axios.put(' http://localhost:3000/departements/' + departement._id, { name }, {
+            headers: { 'authorization': 'barear ' + localStorage.getItem('token') }
+        });
+        console.log(response + "update mouhcine")
+        let updatedDep = parseItem(response, 200);
+        console.log(updatedDep.departement + "update mouhcine")
+
+        return updatedDep
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 export const parseItem = (response, code) => {
     if (response.status !== code) throw Error(response.message);
@@ -57,4 +73,5 @@ const parseList = response => {
 export const departementService = {
     getDepartements,
     deleteDepartement,
+    updateDepartement
 }

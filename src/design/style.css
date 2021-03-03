@@ -21,3 +21,11 @@
     transform: scale(1.03);
     /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+
+.verticalLine {
+    position: relative;
+    right: 780px;
+    transform: rotate(7deg);
+    -webkit-transform: rotate(90deg);
+    background-color: rgb(220, 220, 220)
+}

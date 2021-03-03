@@ -1,8 +1,10 @@
 <template>
   <div class="md">
+    <div class="verticalLine">
+      <b-button variant="light">+</b-button>
+    </div>
     <h2>Departements</h2>
     <br />
-
     <div class="container">
       <div class="list-group">
         <a
@@ -27,72 +29,117 @@
                 Delete
               </button>
               <div class="divider" />
-              <button class="text-muted btn btn-outline-info">Update</button>
+              <button
+                class="text-muted btn btn-outline-info"
+                @click="askToUpdate(d)"
+              >
+                Update
+              </button>
             </div>
           </div>
         </a>
       </div>
-      <Modal
-        :message="modalMessage"
-        :isOpen="showModal"
+      <deleteModal
+        :message="modalDeleteMessage"
+        :isOpen="showDeleteModal"
         @handleNo="closeModal"
-        @handleYes="deleteHero"
+        @handleYes="deleteDep"
       >
-      </Modal>
+      </deleteModal>
+      <updateModal
+        :message="modalUpdateMessage"
+        :isOpen="showUpdateModal"
+        @handleNo="closeModal"
+        @handleYes="updateDep"
+      >
+      </updateModal>
+      <br />
+      <div class="col-md-3 dep">
+        <b-button variant="secondary" @click="askToAdd">Add departement</b-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
-import Modal from "@/components/modal";
+import deleteModal from "@/components/deleteModal";
+import updateModal from "@/components/updateModal";
 
 export default {
   name: "Departements",
   data() {
     return {
       departementToDelete: null,
-      showModal: false,
+      departementToUpdate: null,
+      showDeleteModal: false,
+      showUpdateModal: false,
     };
   },
-    components: {
-    Modal,
+  components: {
+    deleteModal,
+    updateModal,
   },
   async created() {
     await this.loadDepartements();
   },
   methods: {
-    ...mapActions(["getDepartementsAction", "deleteDepartement"]),
+    ...mapActions([
+      "getDepartementsAction",
+      "deleteDepartement",
+      "updateDepartement",
+    ]),
     async loadDepartements() {
       console.log("azeaea");
       await this.getDepartementsAction();
     },
     askToDelete(departement) {
-      console.log("clok");
       this.departementToDelete = departement;
-      console.log(this.showModal);
-      this.showModal = true;
-      console.log(this.showModal);
+      this.showDeleteModal = true;
+    },
+    askToUpdate(departement) {
+      this.departementToUpdate = departement;
+      this.showUpdateModal = true;
+      console.log(this.showUpdateModal);
     },
     closeModal() {
-      this.showModal = false;
+      this.showDeleteModal = false;
+      this.showUpdateModal = false;
     },
-    async deleteHero() {
+    async deleteDep() {
       this.closeModal();
       if (this.departementToDelete) {
         await this.deleteDepartement(this.departementToDelete);
       }
       await this.loadDepartements();
     },
+    async updateDep(name) {
+      this.closeModal();
+      if (this.departementToUpdate) {
+        console.log(name + "iddep" + this.departementToUpdate._id);
+        await this.updateDepartement({
+          name: name,
+          departement: this.departementToUpdate,
+        });
+      }
+      await this.loadDepartements();
+    },
   },
   computed: {
     ...mapState(["departement"]),
-    modalMessage() {
+    modalDeleteMessage() {
       const name =
         this.departementToDelete && this.departementToDelete.name
           ? this.departementToDelete.name
           : "";
-      return `Would you like to delete ${name} ?`;
+      return `Would you like to delete ${name} departement ?`;
+    },
+    modalUpdateMessage() {
+      const name =
+        this.departementToUpdate && this.departementToUpdate.name
+          ? this.departementToUpdate.name
+          : "";
+      return `Would you like to update ${name} departement name ?`;
     },
   },
 };

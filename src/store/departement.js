@@ -14,12 +14,17 @@ const mutations = {
         console.log("state" + state.departements[0].name)
     },
     deleteDepartement(state, departementId) {
-        state.departements = [...state.departements.filters(d => d._id != departementId)];
-    }
+        console.log(state.departements)
+        state.departements = [...state.departements.filter(d => d._id != departementId)];
+    },
+    updateDep(state, updatedDep) {
+        const index = state.departements.findIndex(d => d._id === updatedDep._id);
+        state.departements.splice(index, 1, updatedDep);
+        state.departements = [...state.departements];
+    },
 };
 const actions = {
     async getDepartementsAction({ commit }) {
-        console.log('aciton')
         const departements = await departementService.getDepartements();
         console.log("mouhcine3" + departements)
         return commit('getdepartements', departements)
@@ -28,6 +33,11 @@ const actions = {
         let departementId = await departementService.deleteDepartement(departement);
         return commit('deleteDepartement', departementId)
     },
+    async updateDepartement({ commit }, { name, departement }) {
+        console.log("action dep name" + name + "action dep ID" + departement._id)
+        const updatedDep = await departementService.updateDepartement(departement, name)
+        return commit('updateDep', updatedDep)
+    }
 };
 
 const getters = {}
