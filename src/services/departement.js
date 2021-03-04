@@ -47,6 +47,20 @@ const updateDepartement = async function(departement, name) {
         console.error(error);
     }
 };
+const addDepartement = async function(name) {
+
+    try {
+        const response = await axios.post(' http://localhost:3000/departements', { name }, {
+            headers: { 'authorization': 'barear ' + localStorage.getItem('token') }
+        });
+        console.log(response + "add dep")
+        let addedDep = parseItem(response, 200);
+        console.log(addedDep + "update mouhcine")
+        return addedDep
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 export const parseItem = (response, code) => {
     if (response.status !== code) throw Error(response.message);
@@ -73,5 +87,6 @@ const parseList = response => {
 export const departementService = {
     getDepartements,
     deleteDepartement,
-    updateDepartement
+    updateDepartement,
+    addDepartement
 }

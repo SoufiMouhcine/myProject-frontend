@@ -29,3 +29,118 @@
     -webkit-transform: rotate(90deg);
     background-color: rgb(220, 220, 220)
 }
+
+div.card-content {
+    background-color: #fafafa
+}
+
+.name {
+    font-size: 28px;
+    color: #000;
+}
+
+.description {
+    font-size: 20px;
+    color: #999;
+}
+
+.card {
+    margin-bottom: 2em;
+}
+
+label.label {
+    font-weight: normal;
+}
+
+p.card-header-title {
+    background-color: ghostwhite;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+    display: block;
+    padding-left: 24px;
+}
+
+.card-footerbutton {
+    font-size: 16px;
+    color: #888;
+}
+
+.card-footerbuttoncheck {
+    font-size: 16px;
+    color: #888;
+}
+
+.card-footerbuttoncheck:hover {
+    color: rgb(37, 241, 37);
+}
+
+.right {
+    margin-left: 10px;
+}
+
+.card-footerbutton:hover {
+    color: red;
+}
+
+.card {
+    margin-bottom: 2em;
+}
+
+.modal-card-footbutton {
+    display: inline-block;
+    width: 80px;
+}
+
+button.link {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button.button {
+    border: 0;
+    color: #999;
+}
+
+button.button:hover {
+    color: grey;
+}
+
+.card-footer {
+    height: 3.5em;
+    background-color: #ffff;
+}
+
+.modal-card-foot button {
+    display: inline-block;
+    width: 80px;
+}
+
+.modal-card-head,
+.modal-card-body {
+    text-align: center;
+}
+
+.align {
+    text-align: start;
+}
+
+.title {
+    text-align: initial;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.125;
+    word-break: break-word;
+    border-left: 16px solid grey;
+    border-bottom: 2px solid grey;
+    padding-left: 8px;
+    padding-right: 16px;
+    text-transform: uppercase;
+    color: gray;
+    letter-spacing: 0px;
+}
+
+.title:hover {
+    color: #555;
+}

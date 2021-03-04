@@ -11,7 +11,7 @@ const state = {
 const mutations = {
     getdepartements(state, departements) {
         state.departements = departements;
-        console.log("state" + state.departements[0].name)
+        console.log("state" + state.departements)
     },
     deleteDepartement(state, departementId) {
         console.log(state.departements)
@@ -22,6 +22,9 @@ const mutations = {
         state.departements.splice(index, 1, updatedDep);
         state.departements = [...state.departements];
     },
+    addedDepartement(state, addedDepartement) {
+        state.departements.push(addedDepartement)
+    }
 };
 const actions = {
     async getDepartementsAction({ commit }) {
@@ -37,7 +40,13 @@ const actions = {
         console.log("action dep name" + name + "action dep ID" + departement._id)
         const updatedDep = await departementService.updateDepartement(departement, name)
         return commit('updateDep', updatedDep)
-    }
+    },
+    async AddDepartement({ commit }, name) {
+        console.log("action " + name)
+        let addedDepartement = await departementService.addDepartement(name);
+        return commit('addDepartement', addedDepartement)
+    },
+
 };
 
 const getters = {}

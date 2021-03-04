@@ -2,7 +2,7 @@
   <div>
     <b-modal
       v-model="isOpen"
-      title="Update Departement"
+      :title="title"
       @show="resetModal"
       @hidden="resetModal"
       @ok="handleOk"
@@ -10,7 +10,7 @@
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
-          label="Departement new Name"
+          :label="message"
           label-for="name-input"
           invalid-feedback="Name is required"
           :state="nameState"
@@ -32,6 +32,10 @@ export default {
   name: "updateModal",
   props: {
     message: {
+      type: String,
+      default: () => "",
+    },
+    title: {
       type: String,
       default: () => "",
     },
@@ -74,7 +78,7 @@ export default {
       // Push the name to submitted names
       this.submittedNames.push(this.name);
       // Hide the modal manually
-      this.$emit('handleYes',this.name)
+      this.$emit("handleYes", this.name);
     },
   },
 };

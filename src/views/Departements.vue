@@ -47,7 +47,8 @@
       >
       </deleteModal>
       <updateModal
-        :message="modalUpdateMessage"
+        :title="title"
+        :message="modalMessage"
         :isOpen="showUpdateModal"
         @handleNo="closeModal"
         @handleYes="updateDep"
@@ -55,7 +56,9 @@
       </updateModal>
       <br />
       <div class="col-md-3 dep">
-        <b-button variant="secondary" @click="askToAdd">Add departement</b-button>
+        <b-button variant="secondary" @click="askToUpdate"
+          >Add departement</b-button
+        >
       </div>
     </div>
   </div>
@@ -88,9 +91,9 @@ export default {
       "getDepartementsAction",
       "deleteDepartement",
       "updateDepartement",
+      "AddDepartement",
     ]),
     async loadDepartements() {
-      console.log("azeaea");
       await this.getDepartementsAction();
     },
     askToDelete(departement) {
@@ -99,6 +102,7 @@ export default {
     },
     askToUpdate(departement) {
       this.departementToUpdate = departement;
+
       this.showUpdateModal = true;
       console.log(this.showUpdateModal);
     },
@@ -115,13 +119,12 @@ export default {
     },
     async updateDep(name) {
       this.closeModal();
-      if (this.departementToUpdate) {
-        console.log(name + "iddep" + this.departementToUpdate._id);
-        await this.updateDepartement({
-          name: name,
-          departement: this.departementToUpdate,
-        });
-      }
+      this.departementToUpdate._id
+        ? await this.updateDepartement({
+            name: name,
+            departement: this.departementToUpdate,
+          })
+        : await this.AddDepartement(name);
       await this.loadDepartements();
     },
   },
@@ -134,12 +137,21 @@ export default {
           : "";
       return `Would you like to delete ${name} departement ?`;
     },
-    modalUpdateMessage() {
+    modalMessage() {
       const name =
         this.departementToUpdate && this.departementToUpdate.name
-          ? this.departementToUpdate.name
-          : "";
-      return `Would you like to update ${name} departement name ?`;
+          ? `Would you like to update ${this.departementToUpdate.name} departement name`
+          : "write the name of new departement to add";
+      console.log(name);
+      return name;
+    },
+    title() {
+      const name =
+        this.departementToUpdate && this.departementToUpdate.name
+          ? `Update ${this.departementToUpdate.name} departement`
+          : "Add département";
+      console.log(name);
+      return name;
     },
   },
 };

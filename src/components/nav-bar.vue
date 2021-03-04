@@ -19,11 +19,19 @@
             <router-link class="nav-link" to="/users">Users</router-link>
           </li>
           <li class="nav-item" v-if="account.login.loggedIn == true">
-            <router-link class="nav-link" to="/departements">Departements</router-link>
+            <router-link class="nav-link" to="/departements"
+              >Departements</router-link
+            >
           </li>
         </ul>
         <div v-if="account.login.loggedIn == true">
-          <router-link class="btn btn-outline-primary" to="/login" @click.native="logout()">logout</router-link>
+          <router-link
+            class="btn btn-outline-primary"
+            to="/login"
+            @click.native="logout()"
+          >
+            <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+          </router-link>
         </div>
 
         <form class="d-flex" v-if="account.login.loggedIn != true">
@@ -45,10 +53,10 @@ export default {
     ...mapState(["account"]),
   },
   methods: {
-    ...mapActions(['logoutAction']),
+    ...mapActions(["logoutAction"]),
     logout() {
       this.logoutAction();
-    }
+    },
   },
 };
 </script>
