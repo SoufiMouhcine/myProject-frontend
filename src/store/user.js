@@ -14,19 +14,28 @@ const mutations = {
     deleteUser(state, userId) {
         state.users = [...state.users.filter(u => u._id != userId)];
     },
+    addUser(state, addeduser) {
+        state.users.push(addeduser);
+    },
 };
 const actions = {
     async loadUserAction({ commit }) {
         const users = await userService.getAll();
         commit('getUsers', users)
     },
-    async deleteUser({ commit }, user) {
+    async deleteUserAction({ commit }, user) {
         let userId = await userService.deleteUser(user);
         return commit('deleteUser', userId)
+    },
+    async addUserAction({ commit }, user) {
+        let addeduser = await userService.addUser(user);
+        return commit('addUser', addeduser)
     },
 };
 
 const getters = {
+    getUserById: state => id => state.users.find(u => u._id === id),
+
 
 };
 

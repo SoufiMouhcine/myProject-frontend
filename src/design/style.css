@@ -52,13 +52,17 @@ label.label {
     font-weight: normal;
 }
 
+.card-header {
+    background-color: #555;
+    height: 3.1em;
+}
+
 p.card-header-title {
-    background-color: ghostwhite;
+    text-align: center;
+    background: none;
     text-transform: uppercase;
     letter-spacing: 4px;
     color: #fff;
-    display: block;
-    padding-left: 24px;
 }
 
 .card-footerbutton {
@@ -108,7 +112,7 @@ button.button:hover {
 }
 
 .card-footer {
-    height: 3.5em;
+    height: 3.3em;
     background-color: #ffff;
 }
 
@@ -143,4 +147,20 @@ button.button:hover {
 
 .title:hover {
     color: #555;
+}
+
+input.invalid,
+textarea.invalid,
+select.invalid {
+    border-left: 10px red solid !important;
+}
+
+label.input {
+    background-color: #e5e5e5;
+    border: 1px solid #ccc;
+}
+
+.field {
+    margin-bottom: 0.75rem;
+    text-align: left;
 }

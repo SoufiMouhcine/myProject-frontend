@@ -5,6 +5,7 @@ import register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
+
 const routes = [{
         path: '/',
         name: 'login',
@@ -37,6 +38,15 @@ const routes = [{
         // which is lazy-loaded when the route is visited.
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/Users.vue')
+    },
+    {
+        path: '/user-detail',
+        name: 'user-detail',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/User-detail.vue')
     }
 ]
 

@@ -15,7 +15,7 @@
           <div class="row list">
             <h5 class="col-md-3 dep">{{ d.name }}</h5>
             <div class="col-md-6">
-              <small class="text-muted"
+              <small class="text-muted" v-if="d.created_by"
                 >Created by {{ d.created_by.firstName }}
                 {{ d.created_by.lastName }}<br />
                 le {{ d.createdAt }}
@@ -95,6 +95,7 @@ export default {
     ]),
     async loadDepartements() {
       await this.getDepartementsAction();
+      console.log(this.departement.departements)
     },
     askToDelete(departement) {
       this.departementToDelete = departement;

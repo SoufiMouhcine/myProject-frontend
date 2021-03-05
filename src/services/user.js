@@ -52,6 +52,18 @@ const deleteUser = async function(user) {
     }
 };
 
+const addUser = async function(user) {
+    try {
+        const response = await axios.post(' http://localhost:3000/users', user, {
+            headers: { 'authorization': 'barear ' + localStorage.getItem('token') }
+        });
+        let addedUser = parseItem(response, 200);
+        return addedUser;
+    } catch (error) {
+        return console.error(error);
+    }
+};
+
 const parseList = response => {
     if (response.status !== 200) throw Error(response.message);
     if (!response.data) return [];
@@ -76,6 +88,7 @@ export const userService = {
     login,
     logout,
     getAll,
-    deleteUser
+    deleteUser,
+    addUser
 
 }
