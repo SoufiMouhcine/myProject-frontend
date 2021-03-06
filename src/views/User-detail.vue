@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="title col-md-3">EDIT USER</h2>
+    <h2 class="title col-md-3">{{title}}</h2>
     <br />
     <div class="col-md-9">
       <div class="card">
@@ -99,6 +99,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    title:{
+      type:String,
+      default:"",
+    }
   },
   data() {
     return {

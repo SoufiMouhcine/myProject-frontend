@@ -50,7 +50,8 @@
     <userDetail
       :user="selectedUser"
       :addMode="isAddMode"
-      v-if="(selectedUser || isAddMode)"
+      :title="titleToShow"
+      v-if="selectedUser || isAddMode"
       @cancel="cancelUser"
       @save="saveUser"
     />
@@ -85,12 +86,19 @@ export default {
           : "";
       return `Would you like to delete ${name} ?`;
     },
+    titleToShow() {
+      const name =
+        this.selectedUser
+          ? "User info"
+          : "ADD USER";
+      return name;
+    },
   },
   async created() {
     await this.loadUsers();
   },
   methods: {
-    ...mapActions(["loadUserAction", "deleteUserAction","addUserAction"]),
+    ...mapActions(["loadUserAction", "deleteUserAction", "addUserAction"]),
     async loadUsers() {
       await this.loadUserAction();
     },
@@ -119,9 +127,11 @@ export default {
       this.selectedUser = undefined;
       this.isAddMode = undefined;
     },
-    async saveUser(user){
-      await this.addUserAction(user)
-    }
+    async saveUser(user) {
+      await this.addUserAction(user);
+      this.isAddMode = undefined;
+      await this.loadUsers();
+    },
   },
 };
 </script>

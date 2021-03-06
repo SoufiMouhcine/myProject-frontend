@@ -57,7 +57,8 @@ const addUser = async function(user) {
         const response = await axios.post(' http://localhost:3000/users', user, {
             headers: { 'authorization': 'barear ' + localStorage.getItem('token') }
         });
-        let addedUser = parseItem(response, 200);
+        console.log('service' + response)
+        let addedUser = parseItem(response, 201);
         return addedUser;
     } catch (error) {
         return console.error(error);

@@ -15,7 +15,8 @@ const mutations = {
         state.users = [...state.users.filter(u => u._id != userId)];
     },
     addUser(state, addeduser) {
-        state.users.push(addeduser);
+        console.log(addeduser)
+        state.users.push(addeduser.data);
     },
 };
 const actions = {
