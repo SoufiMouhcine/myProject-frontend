@@ -51,6 +51,7 @@
       :user="selectedUser"
       :addMode="isAddMode"
       :title="titleToShow"
+      :disabled="disabled"
       v-if="selectedUser || isAddMode"
       @cancel="cancelUser"
       @save="saveUser"
@@ -71,6 +72,7 @@ export default {
       userToDelete: null,
       showDeleteModal: false,
       selectedUser: undefined,
+      disabled: true,
     };
   },
   components: {
@@ -87,10 +89,10 @@ export default {
       return `Would you like to delete ${name} ?`;
     },
     titleToShow() {
-      const name =
-        this.selectedUser
-          ? "User info"
-          : "ADD USER";
+      const name = new Object();
+      name.title = this.selectedUser ? "User info" : "ADD USER";
+      name.retour = this.selectedUser ? "Retour" : "Cancel";
+      console.log(name)
       return name;
     },
   },
@@ -122,14 +124,17 @@ export default {
     },
     addUser() {
       this.isAddMode = true;
+      this.disabled = false;
     },
     cancelUser() {
       this.selectedUser = undefined;
       this.isAddMode = undefined;
+      this.disabled = true;
     },
     async saveUser(user) {
       await this.addUserAction(user);
       this.isAddMode = undefined;
+      this.disabled = true;
       await this.loadUsers();
     },
   },

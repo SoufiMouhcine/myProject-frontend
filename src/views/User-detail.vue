@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="title col-md-3">{{title}}</h2>
+    <h2 class="title col-md-3">{{ title.title }}</h2>
     <br />
     <div class="col-md-9">
       <div class="card">
@@ -13,12 +13,17 @@
           <div class="content">
             <div class="field">
               <label class="label">first name</label>
-              <input class="input" v-model="clonedUser.firstName" />
+              <input
+                class="input"
+                :disabled="disabled"
+                v-model="clonedUser.firstName"
+              />
             </div>
             <div class="field">
               <label class="label">last name</label>
               <input
                 class="input"
+                :disabled="disabled"
                 name="lastName"
                 v-model="clonedUser.lastName"
               />
@@ -27,6 +32,7 @@
               <label class="label">email</label>
               <input
                 class="input"
+                :disabled="disabled"
                 name="description"
                 v-model="clonedUser.email"
               />
@@ -35,6 +41,7 @@
               <label class="label">password</label>
               <input
                 class="input"
+                :disabled="disabled"
                 name="password"
                 type="password"
                 v-model="clonedUser.password"
@@ -59,6 +66,7 @@
               <label class="label">département</label>
               <input
                 class="input"
+                :disabled="disabled"
                 name="dep"
                 v-model="clonedUser.departement_id.name"
               />
@@ -71,13 +79,13 @@
             @click="cancelUser"
           >
             <b-icon icon="arrow-counterclockwise" aria-hidden="true"></b-icon>
-            <span class="right">Cancel</span>
+            <span class="right">{{title.retour}}</span>
           </button>
-          <button
+          <button v-if="addMode"
             class="link card-footer-item card-footerbuttoncheck"
             @click="saveUser()"
           >
-          <b-icon icon="cloud-upload" aria-hidden="true"></b-icon>
+            <b-icon icon="cloud-upload" aria-hidden="true"></b-icon>
             <span class="right">Save</span>
           </button>
         </footer>
@@ -99,10 +107,14 @@ export default {
       type: Boolean,
       default: false,
     },
-    title:{
-      type:String,
-      default:"",
-    }
+    title: {
+      type: Object,
+      default: ()=>{},
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -120,6 +132,7 @@ export default {
       };
       await this.loadDepartements();
     } else {
+      console.log("azejazoejaozejazejaez");
       this.clonedUser = { ...this.user };
     }
   },
@@ -132,9 +145,9 @@ export default {
     cancelUser() {
       this.$emit("cancel");
     },
-    saveUser(){
-        this.$emit('save',this.clonedUser)
-    }
+    saveUser() {
+      this.$emit("save", this.clonedUser);
+    },
   },
   computed: {
     ...mapState(["departement"]),
