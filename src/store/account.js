@@ -24,7 +24,6 @@ const mutations = {
         console.log(state.login)
         console.log(state.login.user.firstName)
         localStorage.setItem('token', state.login.token)
-        console.log(localStorage.getItem('token'))
     },
     [LOGOUT](state) {
         state.login.loggedIn = false;
