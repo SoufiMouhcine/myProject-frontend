@@ -24,6 +24,8 @@ const mutations = {
         console.log(state.login)
         console.log(state.login.user.firstName)
         localStorage.setItem('token', state.login.token)
+        localStorage.setItem('userId', state.login.user._id)
+
     },
     [LOGOUT](state) {
         state.login.loggedIn = false;
@@ -46,7 +48,7 @@ const actions = {
         const login = await userService.login(user);
         console.log("loginAction " + login)
         if (login == null) {
-            return alert("login failure")
+            return alert("Email et ou mot de passe incorrect")
         } else {
             commit(LOGIN, login)
             return router.push('/users');

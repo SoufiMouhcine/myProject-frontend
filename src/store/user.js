@@ -9,7 +9,10 @@ const state = {
 };
 const mutations = {
     getUsers(state, users) {
+        let userId = localStorage.getItem('userId')
         state.users = users
+        state.users = [...state.users.filter(u => u._id != userId)];
+
     },
     deleteUser(state, userId) {
         state.users = [...state.users.filter(u => u._id != userId)];

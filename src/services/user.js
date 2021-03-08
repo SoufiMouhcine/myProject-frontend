@@ -25,6 +25,12 @@ const login = async function(user) {
 
 const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    if (localStorage.getItem('userId') != null) {
+        console.log(localStorage.getItem('userId'))
+    }
+
+
 };
 
 const getAll = async function() {
